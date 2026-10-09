@@ -25,17 +25,43 @@ INSERT INTO products(name, category, price,stock)
 VALUES ('Studio Desk Lamp', 'Office',45.50, 25)
 RETURNING id;
 
+
+SELECT id,name, category, price, stock
+FROM products
+WHERE name= 'Studio Desk Lamp';
+
 --Question 5
+
+--Before Update
+
+SELECT id,category,price
+FROM products
+WHERE category='Furniture'
+LIMIT 10;
+
+--UPdate
 
 UPDATE products
 SET price= price*1.10
 WHERE category= 'Furniture';
 
+--After Update
+
+SELECT id,category,price
+FROM products
+WHERE category='Furniture'
+LIMIT 10;
+
 --Question 6
 
 UPDATE orders
 SET status='cancelled'
-WHERE status= 'pending' AND created_at < now()- interval '30 days';
+WHERE status= 'pending' AND created_at < NOw()- INTERVAL '30 days';
+
+
+SELECT id, status, created_at
+FROM orders
+WHERE status= 'pending' AND created_at < NoW() -INTERVAL '30 days';
 
 --Question 7
 
@@ -62,7 +88,9 @@ INSERT INTO orders (user_id, product_id, quantity)
 VALUES (1,1,2);
 
 UPDATE products
-SET stock= stock -2
-WHERE id =1;
+SET stock = stock -2
+WHERE id =1 AND stock >=2;
 
-COMMIT;
+COMMIT;   --If the update result displayed as 1 then run commit 
+
+--ROLLBACK  --if the upate result displayed as 0 then run ROLLBACK
